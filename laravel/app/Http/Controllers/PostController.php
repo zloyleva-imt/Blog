@@ -19,7 +19,8 @@ class PostController extends Controller
      */
     public function index(Post $posts)
     {
-        return view('posts.index',[
+        $view = auth()->check()?'admin.posts.index':'posts.index';
+        return view($view,[
             'posts' => $posts->get()
         ]);
     }
@@ -31,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -66,7 +67,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit',[
+            'post' => $post
+        ]);
     }
 
     /**

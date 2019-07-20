@@ -11,8 +11,7 @@ class PostController extends Controller
 
     public function index(Request $request,Post $posts):View
     {
-        $view = auth()->check()?'admin.posts.index':'posts.index';
-        return view($view,[
+        return view('posts.index',[
             'posts' => $posts->with('user')->get()
         ]);
     }

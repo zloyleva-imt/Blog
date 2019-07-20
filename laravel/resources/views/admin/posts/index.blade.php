@@ -47,7 +47,7 @@
                         <td>{{ $post->user->name }}</td>
                         <td>{{ $post->created_at }}</td>
                         <td>
-
+                            <a href="{{ route('admin.posts.edit',[$post->slug]) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach

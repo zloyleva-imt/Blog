@@ -7,11 +7,11 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Post::class, function (Faker $faker) {
-    $title = $faker->sentence(6);
+    $title = $faker->sentence(8);
     return [
         'title' => $title,
         'slug' => Str::slug($title),
-        'body' => $faker->paragraph(),
+        'body' => $faker->paragraph(20),
         'views' => $faker->numberBetween(1,100),
         'likes' => $faker->numberBetween(1,50),
         'status' => $faker->randomElement(['published', 'hidden']),

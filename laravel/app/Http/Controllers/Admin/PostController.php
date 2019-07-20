@@ -16,11 +16,8 @@ class PostController extends Controller
      */
     public function index(Request $request, Post $posts):View
     {
-
-//        dd($posts->with('user')->paginate());
-
         return view('admin.posts.index', [
-            'posts' => $posts->with('user')->paginate()
+            'posts' => $posts->getAll($request)
         ]);
     }
 

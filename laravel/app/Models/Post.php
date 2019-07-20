@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $primaryKey = 'slug';
-
-    protected $keyType = 'string';
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function user(){
         return $this->belongsTo(User::class);

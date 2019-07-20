@@ -8,13 +8,14 @@ use Illuminate\Support\Str;
 
 $factory->define(Post::class, function (Faker $faker) {
     $title = $faker->sentence(8);
+    $views = $faker->numberBetween(0,100);
     return [
         'title' => $title,
         'slug' => Str::slug($title),
         'body' => $faker->paragraph(20),
-        'views' => $faker->numberBetween(1,100),
-        'likes' => $faker->numberBetween(1,50),
-        'status' => $faker->randomElement(['published', 'hidden']),
+        'views' => $views,
+        'likes' => $faker->numberBetween(0,$views),
+        'published_status' => $faker->randomElement(config('config.models.published_status')),
         'user_id' => $faker->numberBetween(1,3),
     ];
 });

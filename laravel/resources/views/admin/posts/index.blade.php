@@ -7,6 +7,23 @@
                 <h1>Posts list</h1>
             </div>
         </div>
+
+        <div class="row">
+
+            <form>
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <input type="text" class="form-control mb-2" id="inlineFormInput"
+                               name="search" placeholder="Enter search phrase">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-2">Search</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
         <div class="row">
 
             <table class="table table-striped">

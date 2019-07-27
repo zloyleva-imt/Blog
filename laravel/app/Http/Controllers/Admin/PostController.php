@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\View\View;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -35,17 +34,13 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Post $post)
     {
-        $post->create(array_merge($request->all(),[
-            'slug' => Str::slug($request->title),
-            'user_id' => auth()->user()->id
-        ]));
+        $post->create($request->all());
         return redirect()->route('admin.posts.index');
     }
 
@@ -64,6 +59,7 @@ class PostController extends Controller
     /**
      * @param Request $request
      * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Post $post)
     {
@@ -72,10 +68,9 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Post $post)
     {

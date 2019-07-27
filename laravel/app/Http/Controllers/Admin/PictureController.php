@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Picture;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PictureController extends Controller
 {
@@ -35,7 +36,12 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->has('file')){
+            $file = $request->file('file');
+//            $file->storeAs('public/images', $file->getClientOriginalName());
+            dd($file->storeAs('public/images', $file->getClientOriginalName()));
+        }
+        return redirect();
     }
 
     /**

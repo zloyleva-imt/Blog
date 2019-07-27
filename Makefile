@@ -75,3 +75,6 @@ create_seeder: # create seeder name=[seederName]
 
 tinker: # tinker
 	@docker-compose -f ${DOCKER_CONFIG} exec -u www -w /www/laravel app php artisan tinker
+
+storage_link: # storage:link
+	@docker-compose -f ${DOCKER_CONFIG} exec -u www -w /www/laravel app php artisan storage:link

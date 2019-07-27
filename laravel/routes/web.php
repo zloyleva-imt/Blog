@@ -17,4 +17,5 @@ Auth::routes();
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('posts', 'PostController')->except('show');
+    Route::resource('pictures', 'PictureController');
 });

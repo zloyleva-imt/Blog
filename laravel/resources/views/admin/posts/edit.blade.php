@@ -19,8 +19,8 @@
                     <div class="form-group row">
                         <label for="body" class="col-sm-2 col-form-label">Body</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="body" rows="10"
-                            name="body">{{ $post->body }}</textarea>
+                            <textarea class="description form-control" name="body"
+                                      id="body" rows="10">{{ $post->body }}</textarea>
                         </div>
                     </div>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -28,7 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create',[
+            'published_status' => config('config.models.published_status')
+        ]);
     }
 
     /**
@@ -37,9 +40,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-        //
+        $post->create(array_merge($request->all(),[
+            'slug' => Str::slug($request->title),
+            'user_id' => auth()->user()->id
+        ]));
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -70,8 +77,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }

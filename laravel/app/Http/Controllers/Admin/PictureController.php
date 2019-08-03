@@ -29,19 +29,16 @@ class PictureController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Picture $picture
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Picture $picture)
     {
         if($request->has('file')){
-            $file = $request->file('file');
-//            $file->storeAs('public/images', $file->getClientOriginalName());
-            dd($file->storeAs('public/images', $file->getClientOriginalName()));
+            $picture->insertPicture($request->file('file'));
         }
-        return redirect();
+        return redirect()->route('posts.index');
     }
 
     /**

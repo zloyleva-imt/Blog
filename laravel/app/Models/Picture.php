@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Pagination;
 use App\Sevices\Images\ImageConfig;
 use App\Sevices\Images\ImageProcessor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-
+use Illuminate\Http\Request;
 
 class Picture extends Model
 {
+    use Pagination;
+
     protected $fillable = ['path', 'thumbnail'];
 
+    /**
+     * @param UploadedFile $file
+     * @param ImageConfig $config
+     * @return bool
+     */
     public function insertPicture(UploadedFile $file, ImageConfig $config){
 
         $imageProcessor = new ImageProcessor($config);
@@ -28,5 +36,11 @@ class Picture extends Model
             return true;
         }
         return false;
+    }
+
+    public function getAll(Request $request){
+        $query = $this->query();
+
+        return $this->addPagination($query,$request->query());
     }
 }

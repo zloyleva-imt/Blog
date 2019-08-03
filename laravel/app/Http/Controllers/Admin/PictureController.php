@@ -14,9 +14,11 @@ class PictureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Picture $pictures)
     {
-        //
+        return view('admin.pictures.index',[
+            'pictures' => $pictures->getAll($request)
+        ]);
     }
 
     /**
@@ -40,7 +42,7 @@ class PictureController extends Controller
         if($request->has('file')){
             $picture->insertPicture($request->file('file'),$config);
         }
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.pictures.index');
     }
 
     /**

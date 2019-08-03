@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Picture;
+use App\Sevices\Images\ImageConfig;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,12 +32,13 @@ class PictureController extends Controller
     /**
      * @param Request $request
      * @param Picture $picture
+     * @param ImageConfig $config
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Picture $picture)
+    public function store(Request $request, Picture $picture, ImageConfig $config)
     {
         if($request->has('file')){
-            $picture->insertPicture($request->file('file'));
+            $picture->insertPicture($request->file('file'),$config);
         }
         return redirect()->route('posts.index');
     }

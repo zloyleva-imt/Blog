@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Observers\PostObserver;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Post;
 
@@ -26,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Post::observe(PostObserver::class);
+        View::composer('*', function (\Illuminate\View\View $view){
+            $view->with([
+               'routes' => [
+                   'pictureCreate' => route('admin.pictures.create'),
+               ]
+            ]);
+        });
     }
 }

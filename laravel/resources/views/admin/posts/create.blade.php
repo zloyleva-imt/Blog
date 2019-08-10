@@ -13,6 +13,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="title"
                                    name="title" >
+                            @if ($errors->has('title'))
+                                <div class="error">{{ $errors->first('title') }}</div>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
@@ -20,6 +23,9 @@
                         <div class="col-sm-10">
                             <textarea class="form-control" id="body" rows="10"
                                       name="body"></textarea>
+                            @if ($errors->has('body'))
+                                <div class="error">{{ $errors->first('body') }}</div>
+                            @endif
                         </div>
                     </div>
 
@@ -31,6 +37,9 @@
                                     <option>{{ $status }}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('published_status'))
+                                <div class="error">{{ $errors->first('published_status') }}</div>
+                            @endif
                         </div>
                     </div>
 

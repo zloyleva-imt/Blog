@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreatePostRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -38,8 +39,9 @@ class PostController extends Controller
      * @param Post $post
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Post $post)
+    public function store(CreatePostRequest $request, Post $post)
     {
+        dd($request);
         $post->create($request->all());
         return redirect()->route('admin.posts.index');
     }

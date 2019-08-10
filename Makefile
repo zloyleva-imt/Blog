@@ -73,6 +73,9 @@ create_model: # create model name=[modelName]
 create_seeder: # create seeder name=[seederName]
 	@docker-compose -f ${DOCKER_CONFIG} exec -u www -w /www/laravel app php artisan make:seeder $(name)TableSeeder
 
+create_middleware: # create middleware name=[middlewareName]
+	@docker-compose -f ${DOCKER_CONFIG} exec -u www -w /www/laravel app php artisan make:middleware $(name)Middleware
+
 tinker: # tinker
 	@docker-compose -f ${DOCKER_CONFIG} exec -u www -w /www/laravel app php artisan tinker
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Transformers\PostTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -19,6 +20,13 @@ class PostController extends Controller
     {
         return view('admin.posts.index', [
             'posts' => $posts->getAll($request)
+        ]);
+    }
+
+    public function show(Post $post){
+        return view('admin.posts.create',[
+            'published_status' => config('config.models.published_status'),
+            'post' => new PostTransformer($post)
         ]);
     }
 
@@ -41,7 +49,6 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request, Post $post)
     {
-        dd($request);
         $post->create($request->all());
         return redirect()->route('admin.posts.index');
     }

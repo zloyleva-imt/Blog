@@ -16,6 +16,6 @@ Route::resource('posts', 'PostController')->only(['index','show']);
 Auth::routes();
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
-    Route::resource('posts', 'PostController')->except('show');
+    Route::resource('posts', 'PostController');
     Route::resource('pictures', 'PictureController');
 });

@@ -12,6 +12,7 @@ services:
     build: docker/php-fpm
     depends_on:
      - db
+     - beanstalkd
     volumes:
      - "./:/www"
     environment:
@@ -59,8 +60,6 @@ services:
     image: schickling/beanstalkd:latest
     ports:
       - "11300:11300"
-    depends_on:
-      - app
 
   mailhog:
     image: mailhog/mailhog:latest

@@ -19,3 +19,15 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('posts', 'PostController');
     Route::resource('pictures', 'PictureController');
 });
+
+
+Route::get('job1', function(){
+    \App\Jobs\TestJob::dispatch('JOB1')
+        ->delay(now()->addMinutes(1));
+    return '';
+});
+
+Route::get('job2', function(){
+    \App\Jobs\TestJob::dispatch('JOB2');
+    return '';
+});

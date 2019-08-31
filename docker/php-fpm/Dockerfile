@@ -97,6 +97,7 @@ RUN set -xe \
 		&& sed -i '/^set -e/r /docker-ep-extra.sh' /usr/local/bin/docker-php-entrypoint \
 		&& rm -f /docker-ep-extra.sh
 
+RUN apk add --update busybox-suid
 
 #
 # Set working directory
@@ -119,3 +120,4 @@ RUN set -xe \
 		&& curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION \
 		&& ln -s $(pwd)/.composer /home/$DOCKER_USER/.composer
 
+CMD service supervisor start; php-fpm
